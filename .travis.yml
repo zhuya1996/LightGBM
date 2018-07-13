@@ -9,8 +9,8 @@ compiler:
   - gcc
 
 os:
-  - linux
   - osx
+    osx_image: xcode6.4
 
 env:
   global:
@@ -19,28 +19,11 @@ env:
     - TASK=regular
     - TASK=clang
     - TASK=mpi PYTHON_VERSION=2.7
-    - TASK=pylint
-    - TASK=check-docs
-    - TASK=if-else
-    - TASK=sdist PYTHON_VERSION=3.4
-    - TASK=bdist PYTHON_VERSION=3.5
-    - TASK=gpu METHOD=source
-    - TASK=gpu METHOD=pip
 
 matrix:
   exclude:
     - os: linux
       env: TASK=clang
-    - os: osx
-      env: TASK=gpu METHOD=source
-    - os: osx
-      env: TASK=gpu METHOD=pip
-    - os: osx
-      env: TASK=if-else
-    - os: osx
-      env: TASK=pylint
-    - os: osx
-      env: TASK=check-docs
 
 before_install:
   - test -n $CC  && unset CC

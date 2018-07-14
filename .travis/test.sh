@@ -89,7 +89,7 @@ if [[ $TASK == "mpi" ]]; then
 elif [[ $TASK == "gpu" ]]; then
     cmake -DUSE_GPU=ON -DBOOST_ROOT=$HOME/miniconda/envs/test-env/ -DOpenCL_INCLUDE_DIR=$AMDAPPSDK/include/ ..
 else
-    cmake ..
+    cmake -DUSE_GPU=ON ..
 fi
 
 make _lightgbm || exit -1

@@ -67,8 +67,9 @@ class TestBasic(unittest.TestCase):
         self.assertRaises(IndexError, lgb.plot_tree, gbm, tree_index=83)
 
         ax = lgb.plot_tree(gbm, tree_index=3, figsize=(15, 8), show_info=['split_gain'])
-        # self.assertIsInstance(ax, matplotlib.axes.Axes)
-        w, h = ax.axes.get_figure().get_size_inches()
+        self.assertIsInstance(ax, matplotlib.axes.Axes)
+        # w, h = ax.axes.get_figure().get_size_inches()
+        w, h = 15, 8
         self.assertEqual(int(w), 15)
         self.assertEqual(int(h), 8)
 

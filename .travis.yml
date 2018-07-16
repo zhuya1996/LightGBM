@@ -16,7 +16,6 @@ env:
 matrix:
   include:
     - os: osx
-      osx_image: xcode6.4
 
 before_install:
   - test -n $CC  && unset CC

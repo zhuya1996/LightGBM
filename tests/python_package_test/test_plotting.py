@@ -59,6 +59,18 @@ class TestBasic(unittest.TestCase):
         self.assertTupleEqual(ax2.patches[2].get_facecolor(), (0, .5, 0, 1.))  # g
         self.assertTupleEqual(ax2.patches[3].get_facecolor(), (0, 0, 1., 1.))  # b
 
+    @unittest.skipIf(not MATPLOTLIB_INSTALLED or not GRAPHVIZ_INSTALLED, 'matplotlib or graphviz is not installed')
+    def test_plot_tree(self):
+        gbm = lgb.LGBMClassifier(n_estimators=10, num_leaves=3, silent=True)
+        gbm.fit(self.X_train, self.y_train, verbose=False)
+
+        self.assertRaises(IndexError, lgb.plot_tree, gbm, tree_index=83)
+
+        ax = lgb.plot_tree(gbm, tree_index=3, figsize=(15, 8), show_info=['split_gain'])
+        # self.assertIsInstance(ax, matplotlib.axes.Axes)
+        w, h = ax.axes.get_figure().get_size_inches()
+        self.assertEqual(int(w), 15)
+        self.assertEqual(int(h), 8)
 
     @unittest.skipIf(not GRAPHVIZ_INSTALLED, 'graphviz is not installed')
     def test_create_tree_digraph(self):

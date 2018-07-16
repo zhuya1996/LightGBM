@@ -66,7 +66,7 @@ class TestBasic(unittest.TestCase):
 
         self.assertRaises(IndexError, lgb.plot_tree, gbm, tree_index=83)
 
-
+        ax = lgb.plot_tree(gbm, tree_index=3, figsize=(15, 8), show_info=['split_gain'])
 
     @unittest.skipIf(not GRAPHVIZ_INSTALLED, 'graphviz is not installed')
     def test_create_tree_digraph(self):

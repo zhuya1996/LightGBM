@@ -97,7 +97,7 @@ make _lightgbm || exit -1
 cd $TRAVIS_BUILD_DIR/python-package && python setup.py install --precompile || exit -1
 pytest $TRAVIS_BUILD_DIR || exit -1
 
-if [[ $TASK == "regular" ]]; then
+if [[ $TASK == "clang" ]]; then
     cd $TRAVIS_BUILD_DIR/examples/python-guide
     sed -i'.bak' '/import lightgbm as lgb/a\
 import matplotlib\

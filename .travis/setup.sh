@@ -3,6 +3,7 @@
 if [[ $TRAVIS_OS_NAME == "osx" ]]; then
     if  [[ $TASK == "clang" ]]; then
         brew update
+        brew uninstall libiomp clang-omp gcc
         brew install libomp
         brew reinstall cmake --verbose --HEAD  # CMake >=3.12 is needed
     else

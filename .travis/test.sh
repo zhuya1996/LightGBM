@@ -49,6 +49,7 @@ if [[ $TASK == "if-else" ]]; then
 fi
 
 conda install numpy nose scipy scikit-learn pandas matplotlib python-graphviz pytest
+conda search numpy=1.14.5=py36h648b28d_4 --info
 echo "Find!"
 sudo find / -name "libomp*.dylib" -print
 

@@ -49,6 +49,8 @@ if [[ $TASK == "if-else" ]]; then
 fi
 
 conda install numpy nose scipy scikit-learn pandas matplotlib python-graphviz pytest
+echo "Find!"
+sudo find / -name "libomp*.dylib" -print
 
 if [[ $TASK == "sdist" ]]; then
     cd $TRAVIS_BUILD_DIR/python-package && python setup.py sdist || exit -1

@@ -53,6 +53,8 @@ conda install llvm-openmp
 echo "Find!"
 sudo find / -name "lib*omp*.dylib" -print
 
+rm '/Users/travis/miniconda/envs/test-env/lib/libiomp5.dylib'
+
 if [[ $TASK == "sdist" ]]; then
     cd $TRAVIS_BUILD_DIR/python-package && python setup.py sdist || exit -1
     pip install $TRAVIS_BUILD_DIR/python-package/dist/lightgbm-$LGB_VER.tar.gz -v || exit -1

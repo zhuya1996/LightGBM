@@ -49,7 +49,6 @@ if [[ $TASK == "if-else" ]]; then
 fi
 
 conda install numpy nose scipy scikit-learn pandas matplotlib python-graphviz pytest
-conda install llvm-openmp
 echo "Find!"
 sudo find / -name "lib*omp*.dylib" -print
 
@@ -94,7 +93,7 @@ if [[ $TASK == "mpi" ]]; then
 elif [[ $TASK == "gpu" ]]; then
     cmake -DUSE_GPU=ON -DBOOST_ROOT=$HOME/miniconda/envs/test-env/ -DOpenCL_INCLUDE_DIR=$AMDAPPSDK/include/ ..
 else
-    cmake -DUSE_GPU=ON ..
+    cmake ..
 fi
 
 make _lightgbm || exit -1

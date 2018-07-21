@@ -5,7 +5,7 @@ if [[ $TRAVIS_OS_NAME == "osx" ]]; then
         brew update
         brew install libomp
         brew reinstall cmake
-        sudo find / -name "libomp*.dylib" -print
+        sudo find / -name "lib*omp*.dylib" -print
     else
         rm '/usr/local/include/c++'
 #        brew cask uninstall oclint  #  reserve variant to deal with conflict link

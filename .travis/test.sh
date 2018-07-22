@@ -50,7 +50,7 @@ fi
 
 conda install numpy nose scipy scikit-learn pandas matplotlib python-graphviz pytest
 echo "Find!"
-echo $compiler
+echo $COMPILER
 sudo find / -name "lib*omp*.dylib" -print
 ln -sf '/usr/local/lib/libiomp5.dylib' '/Users/travis/miniconda/envs/test-env/lib/libiomp5.dylib'
 # rm '/Users/travis/miniconda/envs/test-env/lib/libiomp5.dylib'

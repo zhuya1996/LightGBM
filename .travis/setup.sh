@@ -2,9 +2,8 @@
 
 if [[ $TRAVIS_OS_NAME == "osx" ]]; then
     if  [[ $COMPILER == "clang" ]]; then
-        cmake --version
         brew install libomp
-        brew reinstall cmake
+        brew reinstall cmake  # CMake >=3.12 is needed to find OpenMP at macOS
     else
         rm '/usr/local/include/c++'
 #        brew cask uninstall oclint  #  reserve variant to deal with conflict link

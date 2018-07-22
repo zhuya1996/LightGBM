@@ -5,17 +5,18 @@ dist: trusty
 git:
   submodules: true
 
-os:
-  - osx
-  - linux
-
 compiler:
   - gcc
+
+os:
+  - linux
+  - osx
 
 env:
   global:
     - PYTHON_VERSION=3.6
     - COMPILER=clang
+    - TASK=regular
 
 before_install:
   - test -n $CC  && unset CC

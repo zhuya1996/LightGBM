@@ -8,6 +8,10 @@ fi
 conda create -q -n test-env python=$PYTHON_VERSION
 source activate test-env
 
+echo $CXX
+echo gcc
+clang --version
+
 cd $TRAVIS_BUILD_DIR
 
 if [[ $TASK == "check-docs" ]]; then

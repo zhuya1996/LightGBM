@@ -11,6 +11,7 @@ compiler:
 env:
   global:
     - PYTHON_VERSION=3.6
+    - COMPILER=gcc
     - TASK=clang
 
 matrix:

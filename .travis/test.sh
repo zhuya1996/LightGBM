@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $TRAVIS_OS_NAME == "osx" ]] && [[ $TASK != "clang" ]]; then
+if [[ $TRAVIS_OS_NAME == "osx" ]] && [[ $COMPILER == "gcc" ]]; then
     export CXX=g++-8
     export CC=gcc-8
 fi
@@ -11,7 +11,7 @@ source activate test-env
 cd $TRAVIS_BUILD_DIR
 
 if [[ $TASK == "check-docs" ]]; then
-    if [[ $TRAVIS_OS_NAME != "osx" ]]; then
+    if [[ $TRAVIS_OS_NAME == "linux" ]]; then
         sudo apt-get install linkchecker
     fi
     if [[ ${PYTHON_VERSION} == "2.7" ]]; then
@@ -27,7 +27,7 @@ if [[ $TASK == "check-docs" ]]; then
     find ./_build/html/ -type f -name '*.html' -exec \
     sed -i -e 's;\(\.\/[^.]*\.\)rst\([^[:space:]]*\);\1html\2;g' {} \;  # emulate js function
 #    html5validator --root ./_build/html/ || exit -1
-    if [[ $TRAVIS_OS_NAME != "osx" ]]; then
+    if [[ $TRAVIS_OS_NAME == "linux" ]]; then
         linkchecker --config=.linkcheckerrc ./_build/html/*.html || exit -1
     fi
     exit 0
@@ -50,7 +50,9 @@ fi
 
 conda install numpy nose scipy scikit-learn pandas matplotlib python-graphviz pytest
 
-ln -sf `ls -d "$(brew --cellar libomp)"/*/lib`/* $CONDA_PREFIX/lib || exit -1
+if [[ $TRAVIS_OS_NAME == "osx" ]] && [[ $COMPILER == "clang" ]]; then
+    ln -sf `ls -d "$(brew --cellar libomp)"/*/lib`/* $CONDA_PREFIX/lib || exit -1  # fix "OMP: Error #15: Initializing libiomp5.dylib, but found libomp.dylib already initialized." (OpenMP library conflict due to conda's MKL)
+fi
 
 if [[ $TASK == "sdist" ]]; then
     cd $TRAVIS_BUILD_DIR/python-package && python setup.py sdist || exit -1
@@ -99,7 +101,7 @@ make _lightgbm || exit -1
 cd $TRAVIS_BUILD_DIR/python-package && python setup.py install --precompile || exit -1
 pytest $TRAVIS_BUILD_DIR || exit -1
 
-if [[ $TASK == "clang" ]]; then
+if [[ $TASK == "regular" ]]; then
     cd $TRAVIS_BUILD_DIR/examples/python-guide
     sed -i'.bak' '/import lightgbm as lgb/a\
 import matplotlib\

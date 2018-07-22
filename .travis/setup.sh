@@ -1,11 +1,10 @@
 #!/bin/bash
 
 if [[ $TRAVIS_OS_NAME == "osx" ]]; then
-    if  [[ $TASK == "clang" ]]; then
-        brew update
+    if  [[ $COMPILER == "clang" ]]; then
+        cmake --version
         brew install libomp
         brew reinstall cmake
-        sudo find / -name "lib*omp*.dylib" -print
     else
         rm '/usr/local/include/c++'
 #        brew cask uninstall oclint  #  reserve variant to deal with conflict link
@@ -17,7 +16,7 @@ if [[ $TRAVIS_OS_NAME == "osx" ]]; then
 #        brew link --overwrite gcc  # previous variant to deal with conflict link
     fi
     wget -O conda.sh https://repo.continuum.io/miniconda/Miniconda${PYTHON_VERSION:0:1}-latest-MacOSX-x86_64.sh
-else
+else  # Linux
     if [[ $TASK == "mpi" ]]; then
         sudo apt-get install -y libopenmpi-dev openmpi-bin
     fi

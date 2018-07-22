@@ -51,6 +51,7 @@ fi
 conda install numpy nose scipy scikit-learn pandas matplotlib python-graphviz pytest
 echo "Find!"
 echo "${COMPILER}"
+brew --cellar libomp
 sudo find / -name "lib*omp*.dylib" -print
 ls -l '/usr/local/lib/libiomp5.dylib'
 ls -l '/usr/local/lib/libomp.dylib'

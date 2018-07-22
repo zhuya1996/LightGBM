@@ -51,8 +51,8 @@ fi
 conda install numpy nose scipy scikit-learn pandas matplotlib python-graphviz pytest
 echo "Find!"
 sudo find / -name "lib*omp*.dylib" -print
-
-rm '/Users/travis/miniconda/envs/test-env/lib/libiomp5.dylib'
+ln -sf '/usr/local/lib/libiomp5.dylib' '/Users/travis/miniconda/envs/test-env/lib/libiomp5.dylib'
+# rm '/Users/travis/miniconda/envs/test-env/lib/libiomp5.dylib'
 
 if [[ $TASK == "sdist" ]]; then
     cd $TRAVIS_BUILD_DIR/python-package && python setup.py sdist || exit -1

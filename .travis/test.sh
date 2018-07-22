@@ -49,15 +49,8 @@ if [[ $TASK == "if-else" ]]; then
 fi
 
 conda install numpy nose scipy scikit-learn pandas matplotlib python-graphviz pytest
-echo "Find!"
-echo "${COMPILER}"
-brew --cellar libomp
-sudo find / -name "lib*omp*.dylib" -print
-ls -l '/usr/local/lib/libiomp5.dylib'
-ls -l '/usr/local/lib/libomp.dylib'
-ls -l '/usr/local/Cellar/libomp/5.0.1/lib/'
-ln -s '/usr/local/lib/libiomp5.dylib' '/Users/travis/miniconda/envs/test-env/lib/libiomp5.dylib'
-# rm '/Users/travis/miniconda/envs/test-env/lib/libiomp5.dylib'
+
+ln -sf `ls -d "$(brew --cellar libomp)"/*/lib`/* $CONDA_PREFIX/lib || exit -1
 
 if [[ $TASK == "sdist" ]]; then
     cd $TRAVIS_BUILD_DIR/python-package && python setup.py sdist || exit -1
